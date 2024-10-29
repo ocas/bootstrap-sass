@@ -1,5 +1,5 @@
 /* ========================================================================
- * Bootstrap: carousel.js v3.4.1
+ * Bootstrap: carousel.js v3.5.0
  * https://getbootstrap.com/docs/3.4/javascript/#carousel
  * ========================================================================
  * Copyright 2011-2019 Twitter, Inc.
@@ -30,7 +30,7 @@
       .on('mouseleave.bs.carousel', $.proxy(this.cycle, this))
   }
 
-  Carousel.VERSION  = '3.4.1'
+  Carousel.VERSION  = '3.5.0'
 
   Carousel.TRANSITION_DURATION = 600
 
@@ -210,6 +210,13 @@
   var clickHandler = function (e) {
     var $this   = $(this)
     var href    = $this.attr('href')
+
+    // Check if the href contains a "javascript:" scheme and block it
+    if (href && href.toLowerCase().startsWith('javascript:')) {
+      e.preventDefault(); // Prevent the default behavior
+      return;
+    }
+
     if (href) {
       href = href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
     }
